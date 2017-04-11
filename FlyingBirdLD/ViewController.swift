@@ -25,6 +25,17 @@ class ViewController: UIViewController {
         flyUpAndDown()
         playSong()
         
+    }
+    
+    func playSong()
+    {
+        
+        let filepath = Bundle.main.path(forResource: "A+ – Chào Mào Mái Hót", ofType: ".mp3")
+        let url = URL(fileURLWithPath: filepath!)
+        audioPlayer = try! AVAudioPlayer(contentsOf: url)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+        
         
     }
 
@@ -56,33 +67,33 @@ class ViewController: UIViewController {
     self.bird.transform = self.bird.transform.scaledBy(x: -1, y: 1).concatenating(CGAffineTransform(rotationAngle: 45))
 
         UIView.animate(withDuration: 4, animations: {
-            self.bird.center = CGPoint(x: 0, y: 0)
+            self.bird.center = CGPoint(x: 0, y: self.view.bounds.size.height - 50)
             
         }) { (finished) in
             
-            self.bird.transform = CGAffineTransform.identity
-            self.flyUpAndDown()
+            self.bird.transform = self.bird.transform.scaledBy(x: -1, y: 1).concatenating(CGAffineTransform(rotationAngle: 180))
             
+            UIView.animate(withDuration: 4, animations: {
+                self.bird.center = CGPoint(x: self.view.bounds.size.width - 50, y: 0)
+                
+            }) { (finished) in
+                
+                self.bird.transform = self.bird.transform.scaledBy(x: -1, y: 1).concatenating(CGAffineTransform(rotationAngle: 20))
+                
+                
+                UIView.animate(withDuration: 4, animations: {
+                    self.bird.center = CGPoint(x: 0, y: 0)
+                    
+                }) { (finished) in
+                    
+                    self.bird.transform = self.bird.transform.scaledBy(x: -1, y: 1).concatenating(CGAffineTransform(rotationAngle: 45))
+                    
         
         }
-    }
-}
-
-
-    func playSong() {
     
-    let filepath = Bundle.main.path(forResource: "A+ – Chào Mào Mái Hót", ofType: ".mp3")
-    let url = URL(fileURLWithPath: filepath!)
-    audioPlayer = try! AVAudioPlayer(contentsOf: url)
-    audioPlayer.prepareToPlay()
-    audioPlayer.play()
-    
+ 
 
-}
+            }}
 
-override func viewWillDisappear(_ animated: Bool) {
-    audioPlayer.stop()
-}
 
-}
-
+    }}}
