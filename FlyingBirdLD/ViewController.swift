@@ -27,7 +27,17 @@ class ViewController: UIViewController {
         
     }
     
- 
+    func playSong()
+    {
+        
+        let filepath = Bundle.main.path(forResource: "A+ – Chào Mào Mái Hót", ofType: ".mp3")
+        let url = URL(fileURLWithPath: filepath!)
+        audioPlayer = try! AVAudioPlayer(contentsOf: url)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+        
+        
+    }
 
   func drawJungle()
   {
@@ -48,17 +58,7 @@ class ViewController: UIViewController {
     }
     
     
-    func playSong()
-    {
-        
-        let filepath = Bundle.main.path(forResource: "A+ – Chào Mào Mái Hót", ofType: ".mp3")
-        let url = URL(fileURLWithPath: filepath!)
-        audioPlayer = try! AVAudioPlayer(contentsOf: url)
-        audioPlayer.prepareToPlay()
-        audioPlayer.play()
-        
-        
-    }
+ 
     
   func flyUpAndDown()
   {
